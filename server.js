@@ -6,14 +6,11 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-// Simulated database (use real DB in production)
 const users = [];
 
-// Register route
 app.post('/api/auth/register', async (req, res) => {
   const { username, password } = req.body;
 
@@ -42,9 +39,9 @@ app.post('/api/auth/login', async (req, res) => {
 
   res.cookie('token', token, {
     httpOnly: true,
-    secure: false, // set true if HTTPS
+    secure: false,
     sameSite: 'strict',
-    maxAge: 60 * 60 * 1000 // 1 hour
+    maxAge: 60 * 60 * 1000
   });
 
   res.json({ message: 'Login successful' });
